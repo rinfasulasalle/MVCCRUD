@@ -6,49 +6,42 @@
 
 <h1>Edit</h1>
 
-<h4>TbArticulo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">TbArticulo</h4>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CodArt" />
             <div class="form-group">
-                <label asp-for="NomArt" class="control-label"></label>
+                <label asp-for="NomArt" class="control-label">Nombre del Articulo:</label>
                 <input asp-for="NomArt" class="form-control" />
                 <span asp-validation-for="NomArt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UniMed" class="control-label"></label>
+                <label asp-for="UniMed" class="control-label">Unidad de Medida:</label>
                 <input asp-for="UniMed" class="form-control" />
                 <span asp-validation-for="UniMed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PreArt" class="control-label"></label>
+                <label asp-for="PreArt" class="control-label">Precio del Articulo:</label>
                 <input asp-for="PreArt" class="form-control" />
                 <span asp-validation-for="PreArt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StkArt" class="control-label"></label>
+                <label asp-for="StkArt" class="control-label">Stock del Articulo:</label>
                 <input asp-for="StkArt" class="form-control" />
                 <span asp-validation-for="StkArt" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeBaja" class="control-label"></label>
+                <label asp-for="DeBaja" class="control-label">Estado de Baja:</label>
                 <input asp-for="DeBaja" class="form-control" />
                 <span asp-validation-for="DeBaja" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
