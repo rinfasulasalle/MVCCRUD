@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MVCCRUD.Models.TbArticulo>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CRUD de articulos";
 }
 
 <h1>CRUD de articulos</h1>
@@ -9,6 +9,16 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
+<!-- Método para filtrar los artículos por las iniciales del campo nom_art -->
+<div class="input-group mb-3">
+    <h4>Nombre del Articulo: </h4>
+    <input type="text" class="form-control" id="searchInput" placeholder="Insertar NomArt">
+    <div class="input-group-append">
+        <button class="btn btn-info" type="button" id="searchButton">Buscar</button>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -27,12 +37,6 @@
             <th>
                 <strong>@Html.DisplayNameFor(model => model.DeBaja)</strong>
             </th>
-            <td>
-                <img src="@Url.Content("/articulos/" + model => model.Cod_art + ".jpg")"
-                     alt="@model.Nommed"
-                     style="width:80px; height:80px;" />
-            </td>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -55,7 +59,12 @@
                     @Html.DisplayFor(modelItem => item.DeBaja)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CodArt" class="btn btn-secondary">Edit</a>
+                    <img src="@Url.Content("/articulos/" + item.CodArt + ".jpg")"
+                         alt="@item.NomArt"
+                         style="width:80px; height:80px;" />
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CodArt" class="btn btn-warning">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.CodArt" class="btn btn-info">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.CodArt" class="btn btn-danger">Dar de baja</a>
                 </td>
@@ -63,3 +72,39 @@
         }
     </tbody>
 </table>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            // Función para filtrar filas de la tabla en función del texto de búsqueda
+            function filterTableRows() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementsByTagName("table")[0];
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1]; // El índice de columna 1 corresponde a la columna 'NomArt'
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = ""; // Mostrar la fila si coincide con el criterio de búsqueda
+                        } else {
+                            tr[i].style.display = "none"; // Ocultar la fila si no coincide con el criterio de búsqueda
+                        }
+                    }
+                }
+            }
+
+            // Ejecutar la función de filtrado cuando se hace clic en el botón de búsqueda
+            $("#searchButton").on("click", function () {
+                filterTableRows();
+            });
+
+            // Ejecutar la función de filtrado cuando el usuario escribe en el cuadro de búsqueda
+            $("#searchInput").on("keyup", function () {
+                filterTableRows();
+            });
+        });
+    </script>
+}
