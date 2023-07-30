@@ -10,9 +10,6 @@ public partial class Bdventas2023WebapiContext : DbContext
     {
         this.configuration = configuration;
     }
-    
-
-
     public virtual DbSet<TbArticulo> TbArticulos { get; set; }
 
     public virtual DbSet<TbArticulosBaja> TbArticulosBajas { get; set; }
