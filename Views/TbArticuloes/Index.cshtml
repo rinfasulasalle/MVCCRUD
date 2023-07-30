@@ -4,7 +4,7 @@
     ViewData["Title"] = "CRUD de articulos";
 }
 
-<h1>CRUD de articulos</h1>
+<h1>Dar de Baja a los artículos articulos</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
@@ -154,7 +154,7 @@
 
                 // Mostrar el mensaje de resultados existentes
                 var countVisibleRows = $("tbody tr:visible").length;
-                var resultMessage = "HAY " + countVisibleRows + " RESULTADOS EXISTENTES";
+                var resultMessage = "" + countVisibleRows + "CANTIDAD:";
                 $("#resultMessage").text(resultMessage).toggleClass("d-none", countVisibleRows === 0);
             }
 
