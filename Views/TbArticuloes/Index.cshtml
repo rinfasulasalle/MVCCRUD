@@ -19,9 +19,21 @@
     </div>
 </div>
 
+<!-- Nueva entrada para buscar por código de artículo -->
+<div class="input-group mb-3">
+    <h4>Código del Articulo: </h4>
+    <input type="text" class="form-control" id="searchCodeInput" placeholder="Insertar CodArt">
+    <div class="input-group-append">
+        <button class="btn btn-info" type="button" id="searchCodeButton">Buscar por Código</button>
+    </div>
+</div>
+
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>
+                <strong>@Html.DisplayNameFor(model => model.CodArt)</strong>
+            </th>
             <th>
                 <strong>@Html.DisplayNameFor(model => model.NomArt)</strong>
             </th>
@@ -44,6 +56,9 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.CodArt)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.NomArt)
                 </td>
                 <td>
@@ -63,15 +78,18 @@
                          alt="@item.NomArt"
                          style="width:80px; height:80px;" />
                 </td>
+                
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.CodArt" class="btn btn-warning">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.CodArt" class="btn btn-info">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.CodArt" class="btn btn-danger">Dar de baja</a>
                 </td>
+                
             </tr>
         }
     </tbody>
 </table>
+
 @section scripts {
     <script>
         $(document).ready(function () {
@@ -84,7 +102,7 @@
                 tr = table.getElementsByTagName("tr");
 
                 for (i = 0; i < tr.length; i++) {
-                    td = tr[i].getElementsByTagName("td")[1]; // El índice de columna 1 corresponde a la columna 'NomArt'
+                    td = tr[i].getElementsByTagName("td")[1]; // El índice de columna 0 corresponde a la columna 'NomArt'
                     if (td) {
                         txtValue = td.textContent || td.innerText;
                         if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -96,14 +114,45 @@
                 }
             }
 
-            // Ejecutar la función de filtrado cuando se hace clic en el botón de búsqueda
+            // Ejecutar la función de filtrado cuando se hace clic en el botón de búsqueda por nombre de artículo
             $("#searchButton").on("click", function () {
                 filterTableRows();
             });
 
-            // Ejecutar la función de filtrado cuando el usuario escribe en el cuadro de búsqueda
+            // Ejecutar la función de filtrado cuando el usuario escribe en el cuadro de búsqueda por nombre de artículo
             $("#searchInput").on("keyup", function () {
                 filterTableRows();
+            });
+
+            // Función para filtrar filas de la tabla en función del código de búsqueda del artículo
+            function filterTableRowsByCode() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("searchCodeInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementsByTagName("table")[0];
+                tr = table.getElementsByTagName("tr");
+
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0]; // El índice de columna 0 corresponde a la columna 'CodArt'
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = ""; // Mostrar la fila si coincide con el criterio de búsqueda
+                        } else {
+                            tr[i].style.display = "none"; // Ocultar la fila si no coincide con el criterio de búsqueda
+                        }
+                    }
+                }
+            }
+
+            // Ejecutar la función de filtrado cuando se hace clic en el botón de búsqueda por código de artículo
+            $("#searchCodeButton").on("click", function () {
+                filterTableRowsByCode();
+            });
+
+            // Ejecutar la función de filtrado cuando el usuario escribe en el cuadro de búsqueda por código de artículo
+            $("#searchCodeInput").on("keyup", function () {
+                filterTableRowsByCode();
             });
         });
     </script>
