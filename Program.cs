@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+//using Microsoft.Extensions.Configuration;
 using MVCCRUD.Models;
 
 var builder = WebApplication.CreateBuilder(args);
