@@ -118,7 +118,7 @@
 
                 // Mostrar el mensaje de resultados existentes
                 var countVisibleRows = $("tbody tr:visible").length;
-                var resultMessage = "HAY " + countVisibleRows + " RESULTADOS EXISTENTES";
+                var resultMessage = "Cantidad: " + countVisibleRows;
                 $("#resultMessage").text(resultMessage).toggleClass("d-none", countVisibleRows === 0);
             }
 
@@ -154,7 +154,7 @@
 
                 // Mostrar el mensaje de resultados existentes
                 var countVisibleRows = $("tbody tr:visible").length;
-                var resultMessage = "" + countVisibleRows + "CANTIDAD:";
+                var resultMessage ="Cantidad: " + countVisibleRows;
                 $("#resultMessage").text(resultMessage).toggleClass("d-none", countVisibleRows === 0);
             }
 
