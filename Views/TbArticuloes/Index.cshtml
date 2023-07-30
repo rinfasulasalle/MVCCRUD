@@ -4,56 +4,62 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>CRUD de articulos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NomArt)
+                <strong>@Html.DisplayNameFor(model => model.NomArt)</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UniMed)
+                <strong>@Html.DisplayNameFor(model => model.UniMed)</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PreArt)
+                <strong>@Html.DisplayNameFor(model => model.PreArt)</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StkArt)
+                <strong>@Html.DisplayNameFor(model => model.StkArt)</strong>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeBaja)
+                <strong>@Html.DisplayNameFor(model => model.DeBaja)</strong>
             </th>
+            <td>
+                <img src="@Url.Content("/articulos/" + model => model.Cod_art + ".jpg")"
+                     alt="@model.Nommed"
+                     style="width:80px; height:80px;" />
+            </td>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomArt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UniMed)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreArt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StkArt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeBaja)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CodArt">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CodArt">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CodArt">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomArt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UniMed)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreArt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StkArt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeBaja)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CodArt" class="btn btn-secondary">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.CodArt" class="btn btn-info">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.CodArt" class="btn btn-danger">Dar de baja</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
